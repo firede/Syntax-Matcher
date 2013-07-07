@@ -58,6 +58,9 @@ class DetectFileTypeCommand(sublime_plugin.EventListener):
         if self.is_apache():
             return
 
+        if self.is_markdown():
+            return
+
 
     def is_rspec(self):
         if self.name.find('_spec') > -1:
@@ -152,6 +155,14 @@ class DetectFileTypeCommand(sublime_plugin.EventListener):
     def is_php(self):
         if self.ext == '.tpl':
             self.set_syntax('Smarty', 'PHP')
+            return True
+
+        return False
+
+
+    def is_markdown(self):
+        if self.ext in ['.text', '.markdown', '.md']:
+            self.set_syntax('Markdown')
             return True
 
         return False
